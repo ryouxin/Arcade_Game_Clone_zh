@@ -16,11 +16,19 @@ Enemy.prototype.update = function(dt) {
     let init = this.x;
     this.x += 180 * dt;
     if (this.x >= 580) {
-        // this.x = 1;
-        // console.log(this.render());
         this.x = -141;
     }
-    // console.log(this.x);
+    // console.log(this.x + ' ' + this.y);
+    if (this.y == player.y) {
+        if (this.x + 75 >= player.x && this.x - 75 <= player.x) {
+            console.log('eat');
+            alert('你被吃了!');
+            player.x = 305;
+            player.y = 315;
+            return;
+        }
+
+    }
 };
 
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -31,20 +39,20 @@ Enemy.prototype.render = function() {
 // 现在实现你自己的玩家类
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
 let Enemy1 = new Enemy();
-Enemy1.x = -141;
-Enemy1.y = 60;
+Enemy1.x = -240;
+Enemy1.y = 235;
 let Enemy2 = new Enemy();
 Enemy2.x = -20;
-Enemy2.y = 145;
+Enemy2.y = 155;
 let Enemy3 = new Enemy();
-Enemy3.x = -240;
-Enemy3.y = 225;
+Enemy3.x = -141;
+Enemy3.y = 75;
 let Enemy4 = new Enemy();
 Enemy4.x = -440;
-Enemy4.y = 145;
+Enemy4.y = 155;
 let Enemy5 = new Enemy();
 Enemy5.x = -240;
-Enemy5.y = 60;
+Enemy5.y = 75;
 var allEnemies = [Enemy1, Enemy2, Enemy3, Enemy4, Enemy5];
 // var allEnemies = [Enemy1];
 
@@ -66,20 +74,36 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 Player.prototype.handleInput = function(e) {
-    console.log(e);
     switch (e) {
         case 'left':
+            if (this.x - 101 <= 0) {
+                return;
+            }
             this.x -= 101;
             break;
         case 'right':
+            if (this.x + 101 >= 450) {
+                return;
+            }
             this.x += 101;
             break;
         case 'up':
-            this.y -= 101;
+            if (this.y - 80 <= -20) {
+                return;
+            }
+            this.y -= 80;
             break;
         case 'down':
-            this.y += 101;
+            if (this.y + 80 >= 450) {
+                return;
+            }
+            this.y += 80;
             break;
+    }
+    if (this.y <= -5) {
+        alert('you win!');
+        player.x = 305;
+        player.y = 315;
     }
 }
 let player = new Player();
