@@ -46,15 +46,19 @@ var Engine = (function(global) {
          * 来调用这个函数
          */
         win.requestAnimationFrame(main);
+
     }
 
     /* 这个函数调用一些初始化工作，特别是设置游戏必须的 lastTime 变量，这些工作只用
      * 做一次就够了
      */
     function init() {
+        getEnemies();
         reset();
         lastTime = Date.now();
         main();
+
+
     }
 
     /* 这个函数被 main 函数（我们的游戏主循环）调用，它本身调用所有的需要更新游戏角色
@@ -107,7 +111,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
         renderEntities();
     }
 
