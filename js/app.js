@@ -16,7 +16,7 @@ var Enemy = function(x, y, speed) {
 
     // 敌人的图片或者雪碧图，用一个我们提供的工具函数来轻松的加载文件
     var enemy = Object.create(Enemy.prototype);
-    Character.call(enemy, x, y, 'images/enemy-bug.png');
+    Character.call(enemy, x, y, 'images/1.png');
     enemy.speed = speed;
     enemy.fat = 75;
     return enemy
@@ -66,7 +66,7 @@ var getEnemies = function() {
 // 把所有敌人的对象都放进一个叫 allEnemies 的数组里面
 // 把玩家对象放进一个叫 player 的变量里面
 var Player = function() {
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/2.png';
 }
 Player.prototype.update = function() {
 
